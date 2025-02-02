@@ -32,12 +32,12 @@ public class PropertyService {
             existingProperty.setAddress(property.getAddress());
             existingProperty.setAvailabilityStatus(property.isAvailabilityStatus());
             existingProperty.setDescription(property.getDescription());
-            existingProperty.setOwnerId(property.getOwnerId());
             existingProperty.setPropertyType(property.getPropertyType());
             existingProperty.setRentPrice(property.getRentPrice());
+            existingProperty.setOwner(property.getOwner());
             return propertyRepository.save(existingProperty);
-        } else {
-            return null;
+            } else {
+                return null;
         }
         
     }

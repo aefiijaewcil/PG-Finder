@@ -2,11 +2,13 @@ package com.pgfinder.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 
 @Entity
 @Table(name = "property")
@@ -26,11 +28,12 @@ public class Property {
     @Column(name = "rentprice")
     private double rentPrice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ownerid")
+    private Owner owner;
+
     @Column(name = "availabilitystatus")
     private boolean availabilityStatus;
-
-    @Column(name = "ownerid")
-    private int ownerId;
 
     @Column(name = "description")
     private String description;
@@ -38,19 +41,19 @@ public class Property {
     public Property() {
     }
 
-    public Property(String propertyType, String address, double rentPrice, boolean availabilityStatus, int ownerId, String description) {
+    public Property(String propertyType, String address, double rentPrice, boolean availabilityStatus, Owner owner, String description) {
         this.propertyType = propertyType;
         this.address = address;
         this.rentPrice = rentPrice;
         this.availabilityStatus = availabilityStatus;
-        this.ownerId = ownerId;
+        this.owner = owner;
         this.description = description;
     }
 
     public int getPropertyId() {
         return propertyId;
     }
- 
+
     public String getPropertyType() {
         return propertyType;
     }
@@ -67,8 +70,8 @@ public class Property {
         return availabilityStatus;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public Owner getOwner() {
+        return owner;
     }
 
     public String getDescription() {
@@ -95,14 +98,11 @@ public class Property {
         this.availabilityStatus = availabilityStatus;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-    
 }
