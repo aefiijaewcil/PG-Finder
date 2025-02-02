@@ -1,10 +1,14 @@
 package com.pgfinder.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +26,9 @@ public class Owner {
     private String phonenumber;
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)  // Owner holds the list of properties
+    private List<Property> properties;
 
     public Owner(int ownerid, String name, String email, String phonenumber, String password) {
         this.ownerid = ownerid;
