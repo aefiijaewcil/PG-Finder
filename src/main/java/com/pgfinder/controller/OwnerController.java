@@ -14,7 +14,7 @@ import com.pgfinder.service.OwnerService;
 import com.pgfinder.entity.Owner;
 
 @RestController
-@RequestMapping("/pgfinder")
+@RequestMapping("/owner")
 public class OwnerController {
     @Autowired
     private OwnerService oservice;
