@@ -1,16 +1,16 @@
 package com.pgfinder.entity;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Review {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reviewid")
@@ -23,7 +23,8 @@ public class Review {
     private int userid;
 
     @Column(name = "rating")
-    private Enum rating;
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
 
     @Column(name = "comments")
     private String comments;
@@ -31,7 +32,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(int reviewid, int propertyid, int userid, Enum rating, String comments) {
+    public Review(int reviewid, int propertyid, int userid, Rating rating, String comments) {
         this.reviewid = reviewid;
         this.propertyid = propertyid;
         this.userid = userid;
@@ -58,16 +59,16 @@ public class Review {
     public int getUserid() {
         return userid;
     }
-    
+
     public void setUserid(int userid) {
         this.userid = userid;
     }
 
-    public Enum getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(Enum rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
@@ -78,7 +79,5 @@ public class Review {
     public void setComments(String comments) {
         this.comments = comments;
     }
-
-
 
 }

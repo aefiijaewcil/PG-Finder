@@ -18,7 +18,7 @@ public class ReviewService {
 
     public void changeReview(Review newReview, int reviewid) {
 
-        Review oldReview = repo.findById(newReview.getReviewid()).get();
+        Review oldReview = repo.findById(reviewid).get();
         oldReview.setUserid(newReview.getUserid());
         oldReview.setComments(newReview.getComments());
         oldReview.setRating(newReview.getRating());

@@ -11,7 +11,7 @@ import com.pgfinder.service.ReviewService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/review")
@@ -19,8 +19,8 @@ public class ReviewController {
     @Autowired
     private ReviewService rService;
 
-    @GetMapping("/addreview")
-    public void createReview(Review review) {
+    @PostMapping("/addreview")
+    public void createReview(@RequestBody Review review) {
         rService.Addreview(review);
     }
 
