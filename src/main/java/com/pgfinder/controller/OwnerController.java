@@ -12,37 +12,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import com.pgfinder.service.OwnerService;
 import com.pgfinder.entity.Owner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping("/pgfinder")
 public class OwnerController {
     @Autowired
-    private OwnerService service;
+    private OwnerService oservice;
 
     @GetMapping("/getallowners")
     public List<Owner> getAllOwners() {
-        return service.findAllOwners();
+        return oservice.findAllOwners();
     }
 
     @GetMapping("/getownerdetails/{id}")
     public Owner getOwnerById(@PathVariable int id) {
-        return service.findOwnerById(id);
+        return oservice.findOwnerById(id);
     }
 
     @PostMapping("/addowner")
     public void createOwner(@RequestBody Owner owner) {
-        service.addOwner(owner);
+        oservice.addOwner(owner);
     }
 
     @PutMapping("/updateowner/{id}")
     public void updateOwnerDetails(@RequestBody Owner owner, @PathVariable int id) {
-        service.updateOwner(owner, id);
+        oservice.updateOwner(owner, id);
     }
 
     @DeleteMapping("/deleteowner/{id}")
     public void removeOwner(@PathVariable int id) {
-        service.deleteOwner(id);
+        oservice.deleteOwner(id);
     }
 
 }

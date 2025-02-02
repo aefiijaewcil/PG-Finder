@@ -1,4 +1,5 @@
 package com.pgfinder.service;
+
 import org.springframework.stereotype.Service;
 import com.pgfinder.entity.Owner;
 import com.pgfinder.repo.OwnerRepository;
@@ -6,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-
 public class OwnerService {
     @Autowired
     private OwnerRepository repo;
