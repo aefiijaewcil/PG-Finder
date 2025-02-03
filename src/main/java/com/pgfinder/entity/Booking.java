@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,16 +22,17 @@ public class Booking {
     @Column(name = "propertyid")
     private int propertyId;
 
-    @Column(name = "tenantid")
-    private int tenantId;
+    @ManyToOne
+    @JoinColumn(name = "tenantid", nullable = false)
+    private Tenant tenant;
 
     @Column(name = "bookingdate")
     private LocalDate bookingDate;
 
-    public Booking(int bookingId, int propertyId, int tenantId, LocalDate bookingDate) {
+    public Booking(int bookingId, int propertyId, Tenant tenant, LocalDate bookingDate) {
         this.bookingId = bookingId;
         this.propertyId = propertyId;
-        this.tenantId = tenantId;
+        this.tenant = tenant;
         this.bookingDate = bookingDate;
     }
 
@@ -44,8 +47,8 @@ public class Booking {
         return propertyId;
     }
 
-    public int getTenantId() {
-        return tenantId;
+    public Tenant getTenant() {
+        return tenant;
     }
 
     public LocalDate getBookingDate() {
@@ -56,8 +59,8 @@ public class Booking {
         this.propertyId = propertyId;
     }
 
-    public void setTenantId(int tenantId) {
-        this.tenantId = tenantId;
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     public void setBookingDate(LocalDate bookingDate) {
