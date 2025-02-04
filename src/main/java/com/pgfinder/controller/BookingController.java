@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,20 +30,20 @@ public class BookingController {
     private TenantService tenantService;
 
     @PostMapping("/addbooking")
-    public void createBooking(@RequestParam int propertyId, @RequestParam LocalDate bookingDate,
+    public void createBooking(@RequestParam int propertyId, @RequestParam String bookingDate,
             @RequestParam int tenantId) {
         Booking booking = new Booking();
         Tenant tenant = tenantService.findTenantById(tenantId);
 
         booking.setPropertyId(propertyId);
-        booking.setBookingDate(bookingDate);
+        booking.setBookingDate(LocalDate.parse(bookingDate));
         booking.setTenant(tenant);
         bookingService.addBooking(booking);
     }
 
-    @DeleteMapping("/cancel/{bookingId}")
-    public boolean cancelBooking(@PathVariable int bookingId) {
-        return bookingService.deleteBooking(bookingId);
+    @DeleteMapping("/cancelbooking/{bookingId}")
+    public void cancelBooking(@PathVariable int bookingId) {
+        bookingService.deleteBooking(bookingId);
     }
 
     @GetMapping("/status/{bookingId}")
@@ -55,6 +56,12 @@ public class BookingController {
     @GetMapping("/allbookinglist/{tenantId}")
     public List<Booking> getAllBookings(@PathVariable int tenantId) {
         return bookingService.getAllBookings(tenantId);
+    }
+
+    @DeleteMapping("/deletealltenantbookings/{tenantId}")
+    public void deleteAllBookings(@PathVariable int tenantId) {
+        Tenant tenant = tenantService.findTenantById(tenantId);
+        bookingService.deleteAllTenantBookings(tenant);
     }
 
 }

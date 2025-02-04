@@ -38,4 +38,8 @@ public class TenantService {
     public Tenant findTenantById(int id) {
         return repo.findById(id).orElse(null);
     }
+
+    public void deleteAllTenantsBooking(int tenanatId) {
+        repo.deleteAll();
+    }
 }
