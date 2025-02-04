@@ -1,5 +1,9 @@
 package com.pgfinder.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,8 +24,8 @@ public class Property {
     @Column(name = "propertyid")
     private int propertyId;
 
-    @Column(name = "propertytype")
-    private String propertyType;
+    @Column(name = "propertyname")
+    private String propertyName;
 
     @Column(name = "address")
     private String address;
@@ -28,8 +33,8 @@ public class Property {
     @Column(name = "rentprice")
     private double rentPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ownerid")
+    @ManyToOne
+    @JoinColumn(name = "ownerid", nullable = false)
     private Owner owner;
 
     @Column(name = "availabilitystatus")
@@ -38,15 +43,19 @@ public class Property {
     @Column(name = "description")
     private String description;
 
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviewsList = new ArrayList<>();
+
     public Property() {
     }
 
-    public Property(String propertyType, String address, double rentPrice, boolean availabilityStatus, Owner owner, String description) {
-        this.propertyType = propertyType;
+    public Property(String propertyName, String address, double rentPrice, Owner owner, boolean availabilityStatus,
+            String description) {
+        this.propertyName = propertyName;
         this.address = address;
         this.rentPrice = rentPrice;
-        this.availabilityStatus = availabilityStatus;
         this.owner = owner;
+        this.availabilityStatus = availabilityStatus;
         this.description = description;
     }
 
@@ -54,8 +63,8 @@ public class Property {
         return propertyId;
     }
 
-    public String getPropertyType() {
-        return propertyType;
+    public String getPropertyName() {
+        return propertyName;
     }
 
     public String getAddress() {
@@ -66,12 +75,12 @@ public class Property {
         return rentPrice;
     }
 
-    public boolean isAvailabilityStatus() {
-        return availabilityStatus;
-    }
-
     public Owner getOwner() {
         return owner;
+    }
+
+    public boolean isAvailabilityStatus() {
+        return availabilityStatus;
     }
 
     public String getDescription() {
@@ -82,8 +91,8 @@ public class Property {
         this.propertyId = propertyId;
     }
 
-    public void setPropertyType(String propertyType) {
-        this.propertyType = propertyType;
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
     public void setAddress(String address) {
@@ -94,12 +103,12 @@ public class Property {
         this.rentPrice = rentPrice;
     }
 
-    public void setAvailabilityStatus(boolean availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
-    }
-
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public void setAvailabilityStatus(boolean availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 
     public void setDescription(String description) {

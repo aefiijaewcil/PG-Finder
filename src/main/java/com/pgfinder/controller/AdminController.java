@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/admin")
@@ -28,9 +27,9 @@ public class AdminController {
         return aService.findAllAdmins();
     }
 
-    @GetMapping("/getadmindetails/{id}")
-    public Admin getAdminById(@PathVariable int id) {
-        return aService.findAdminById(id);
+    @GetMapping("/getadmindetails/{adminId}")
+    public Admin getAdminById(@PathVariable int adminId) {
+        return aService.findAdminById(adminId);
     }
 
     @PostMapping("/addadmin")
@@ -38,14 +37,14 @@ public class AdminController {
         aService.addAdmin(admin);
     }
 
-    @PutMapping("/updateadmin/{id}")
-    public void updateAdminDetails(@RequestBody Admin admin, @PathVariable int id) {
-        aService.updateAdmin(admin, id);
+    @PutMapping("/updateadmin/{adminId}")
+    public void updateAdminDetails(@RequestBody Admin admin, @PathVariable int adminId) {
+        aService.updateAdmin(admin, adminId);
     }
 
-    @DeleteMapping("/deleteadmin/{id}")
-    public void removeAdmin(@PathVariable int id) {
-        aService.deleteAdmin(id);
+    @DeleteMapping("/deleteadmin/{adminId}")
+    public void removeAdmin(@PathVariable int adminId) {
+        aService.deleteAdmin(adminId);
     }
 
 }

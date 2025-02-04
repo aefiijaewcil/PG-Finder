@@ -13,7 +13,7 @@ public class PropertyService {
 
     @Autowired
     private PropertyRepository propertyRepository;
-    
+
     public List<Property> getAllProperties() {
         return propertyRepository.findAll();
     }
@@ -26,24 +26,33 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    public Property updateProperty(Property property,int id) {
+    public Property updateProperty(Property property, int id) {
         Property existingProperty = propertyRepository.findById(id).orElse(null);
         if (existingProperty != null) {
             existingProperty.setAddress(property.getAddress());
             existingProperty.setAvailabilityStatus(property.isAvailabilityStatus());
             existingProperty.setDescription(property.getDescription());
-            existingProperty.setPropertyType(property.getPropertyType());
+            existingProperty.setPropertyName(property.getPropertyName());
             existingProperty.setRentPrice(property.getRentPrice());
-            existingProperty.setOwner(property.getOwner());
             return propertyRepository.save(existingProperty);
-            } else {
-                return null;
+        } else {
+            return null;
         }
-        
+
     }
 
     public void deleteProperty(int id) {
         propertyRepository.deleteById(id);
+    }
+
+    // for owner service of listing properties(custome Query)
+    public List<Property> getPropertiesByOwnerId(int ownerId) {
+        return propertyRepository.findByOwnerId(ownerId);
+    }
+
+    // for owner service of delete properties(custome Query)
+    public void deletePropertiesByOwnerId(int ownerId) {
+        propertyRepository.deleteByOwnerId(ownerId);
     }
 
 }

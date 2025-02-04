@@ -24,9 +24,9 @@ public class OwnerController {
         return oservice.findAllOwners();
     }
 
-    @GetMapping("/getownerdetails/{id}")
-    public Owner getOwnerById(@PathVariable int id) {
-        return oservice.findOwnerById(id);
+    @GetMapping("/getownerdetails/{ownerId}")
+    public Owner getOwnerById(@PathVariable int ownerId) {
+        return oservice.findOwnerById(ownerId);
     }
 
     @PostMapping("/addowner")
@@ -34,14 +34,14 @@ public class OwnerController {
         oservice.addOwner(owner);
     }
 
-    @PutMapping("/updateowner/{id}")
-    public void updateOwnerDetails(@RequestBody Owner owner, @PathVariable int id) {
-        oservice.updateOwner(owner, id);
+    @PutMapping("/updateowner/{ownerId}")
+    public void updateOwnerDetails(@RequestBody Owner owner, @PathVariable int ownerId) {
+        oservice.updateOwner(owner, ownerId);
     }
 
-    @DeleteMapping("/deleteowner/{id}")
-    public void removeOwner(@PathVariable int id) {
-        oservice.deleteOwner(id);
+    @DeleteMapping("/deleteowner/{ownerId}")
+    public void removeOwner(@PathVariable int ownerId) {
+        oservice.deleteOwner(ownerId);
     }
 
 }

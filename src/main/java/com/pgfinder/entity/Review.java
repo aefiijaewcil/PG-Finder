@@ -1,5 +1,7 @@
 package com.pgfinder.entity;
 
+import com.pgfinder.enums.Rating;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,20 +9,25 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "review")
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reviewid")
-    private int reviewid;
+    private int reviewId;
 
-    @Column(name = "propertyid")
-    private int propertyid;
+    @ManyToOne
+    @JoinColumn(name = "propertyid", nullable = false)
+    private Property property;
 
-    @Column(name = "userid")
-    private int userid;
+    @Column(name = "tenantid")
+    private int tenantId;
 
     @Column(name = "rating")
     @Enumerated(EnumType.STRING)
@@ -32,36 +39,36 @@ public class Review {
     public Review() {
     }
 
-    public Review(int reviewid, int propertyid, int userid, Rating rating, String comments) {
-        this.reviewid = reviewid;
-        this.propertyid = propertyid;
-        this.userid = userid;
+    public Review(int reviewid, Property property, int tenantId, Rating rating, String comments) {
+        this.reviewId = reviewid;
+        this.property = property;
+        this.tenantId = tenantId;
         this.rating = rating;
         this.comments = comments;
     }
 
-    public int getReviewid() {
-        return reviewid;
+    public int getReviewId() {
+        return reviewId;
     }
 
-    public void setReviewid(int reviewid) {
-        this.reviewid = reviewid;
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
-    public int getPropertyid() {
-        return propertyid;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setPropertyid(int propertyid) {
-        this.propertyid = propertyid;
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getTenantId() {
+        return tenantId;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setTenantId(int tenantId) {
+        this.tenantId = tenantId;
     }
 
     public Rating getRating() {
