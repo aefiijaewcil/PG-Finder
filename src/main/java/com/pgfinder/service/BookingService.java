@@ -23,9 +23,8 @@ public class BookingService {
         return true;
     }
 
-    public boolean deleteBooking(int bookingId) {
+    public void deleteBooking(int bookingId) {
         bookingRepository.deleteById(bookingId);
-        return true;
     }
 
     public Booking getBookingById(int bookingId) {
@@ -35,6 +34,10 @@ public class BookingService {
     public List<Booking> getAllBookings(int tenanatId) {
         Tenant tenant = tenantService.findTenantById(tenanatId);
         return bookingRepository.findByTenant(tenant);
+    }
+
+    public void deleteAllTenantBookings(Tenant tenant) {
+        bookingRepository.deleteByTenant(tenant);
     }
 
 }
