@@ -27,9 +27,9 @@ public class TenantController {
         return tservice.findAllTenants();
     }
 
-    @GetMapping("/gettenantdetails/{id}")
-    public Tenant getTenantById(@PathVariable int id) {
-        return tservice.findTenantById(id);
+    @GetMapping("/gettenantdetails/{tenanatId}")
+    public Tenant getTenantById(@PathVariable int tenantId) {
+        return tservice.findTenantById(tenantId);
     }
 
     @PostMapping("/addtenant")
@@ -37,13 +37,13 @@ public class TenantController {
         tservice.addTenant(tenant);
     }
 
-    @PutMapping("/updatetenant/{id}")
-    public void updateTenantDetails(@RequestBody Tenant tenant, @PathVariable int id) {
-        tservice.updateTenant(tenant, id);
+    @PutMapping("/updatetenant/{tenantId}")
+    public void updateTenantDetails(@RequestBody Tenant tenant, @PathVariable int tenantId) {
+        tservice.updateTenant(tenant, tenantId);
     }
 
-    @DeleteMapping("/deletetenant/{id}")
-    public void removeTenant(@PathVariable int id) {
-        tservice.deleteTenant(id);
+    @DeleteMapping("/deletetenant/{tenantId}")
+    public void removeTenant(@PathVariable int tenantId) {
+        tservice.deleteTenant(tenantId);
     }
 }

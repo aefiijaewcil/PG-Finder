@@ -1,5 +1,6 @@
 package com.pgfinder.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -27,8 +28,8 @@ public class Owner {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)  // Owner holds the list of properties
-    private List<Property> properties;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY) // Owner holds the list of properties
+    private List<Property> properties = new ArrayList<>();
 
     public Owner(int ownerid, String name, String email, String phonenumber, String password) {
         this.ownerid = ownerid;
@@ -76,5 +77,4 @@ public class Owner {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

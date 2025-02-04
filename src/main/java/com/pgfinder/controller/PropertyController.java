@@ -21,7 +21,7 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
-    
+
     @GetMapping("/getproperties")
     public List<Property> getProperties() {
         return propertyService.getAllProperties();
@@ -29,21 +29,33 @@ public class PropertyController {
 
     @PostMapping("/addproperty")
     public void createProperty(@RequestBody Property property) {
-         propertyService.addProperty(property);
+        propertyService.addProperty(property);
     }
 
-    @GetMapping("/getproperty/{id}")
-    public Property getProperty(@PathVariable int id) {
-        return propertyService.getPropertyById(id);
+    @GetMapping("/getproperty/{propertyId}")
+    public Property getProperty(@PathVariable int propertyId) {
+        return propertyService.getPropertyById(propertyId);
     }
 
-    @PutMapping("/updateproperty/{id}")
-    public Property updatePropertyDetails(@RequestBody Property property,@PathVariable int id) {
-        return propertyService.updateProperty(property, id);
+    @PutMapping("/updateproperty/{propertyId}")
+    public Property updatePropertyDetails(@RequestBody Property property, @PathVariable int propertyId) {
+        return propertyService.updateProperty(property, propertyId);
     }
 
-    @DeleteMapping("/deleteproperty/{id}")
-    public void removeProperty(@PathVariable int id) {
-        propertyService.deleteProperty(id);
+    @DeleteMapping("/deleteproperty/{propertyId}")
+    public void removeProperty(@PathVariable int propertyId) {
+        propertyService.deleteProperty(propertyId);
     }
+
+    @GetMapping("/owner/{ownerId}")
+    public List<Property> getPropertiesByOwnerId(@PathVariable int ownerId) {
+        List<Property> propertiesList = propertyService.getPropertiesByOwnerId(ownerId);
+        return propertiesList;
+    }
+
+    @DeleteMapping("/owner/{ownerId}")
+    public void deletePropertiesByOwner(@PathVariable int ownerId) {
+        propertyService.deletePropertiesByOwnerId(ownerId);
+    }
+
 }
