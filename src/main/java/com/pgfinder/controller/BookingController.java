@@ -35,7 +35,7 @@ public class BookingController {
     public void createBooking(@RequestParam int propertyId, @RequestParam String bookingDate,
             @RequestParam int tenantId) {
         Booking booking = new Booking();
-        Tenant tenant = tenantService.findTenantById(tenantId);
+        Tenant tenant = tenantService.getTenantById(tenantId);
 
         booking.setPropertyId(propertyId);
         booking.setBookingDate(LocalDate.parse(bookingDate));
@@ -62,7 +62,7 @@ public class BookingController {
 
     @DeleteMapping("/deletealltenantbookings/{tenantId}")
     public void deleteAllBookings(@PathVariable int tenantId) {
-        Tenant tenant = tenantService.findTenantById(tenantId);
+        Tenant tenant = tenantService.getTenantById(tenantId);
         bookingService.deleteAllTenantBookings(tenant);
     }
 

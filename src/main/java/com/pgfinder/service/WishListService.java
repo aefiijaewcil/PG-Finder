@@ -19,7 +19,7 @@ public class WishListService {
     private TenantService tenantService;
 
     public void addPropertyToWishList(int tenantId, int propertyId) {
-        Tenant tenant = tenantService.findTenantById(tenantId);
+        Tenant tenant = tenantService.getTenantById(tenantId);
 
         WishList wishList = new WishList();
         wishList.setPropertyId(propertyId);
@@ -33,13 +33,13 @@ public class WishListService {
     }
 
     public void removeAllPropertiesFromWishList(int tenantId) {
-        Tenant tenant = tenantService.findTenantById(tenantId);
+        Tenant tenant = tenantService.getTenantById(tenantId);
 
         wishListRepository.deleteAllByTenantId(tenant);
     }
 
     public List<WishList> getTenantWishlist(int tenantId) {
-        Tenant tenant = tenantService.findTenantById(tenantId);
+        Tenant tenant = tenantService.getTenantById(tenantId);
         return wishListRepository.findByTenant(tenant);
     }
 

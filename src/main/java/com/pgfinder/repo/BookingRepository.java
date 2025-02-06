@@ -1,6 +1,5 @@
 package com.pgfinder.repo;
 
-import java.beans.Transient;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

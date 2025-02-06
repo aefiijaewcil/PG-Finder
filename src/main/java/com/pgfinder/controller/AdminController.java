@@ -22,31 +22,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
-    private AdminService aService;
+    private AdminService adminService;
 
     @GetMapping("/getalladmins")
     public List<Admin> getAllAdmins() {
-        return aService.findAllAdmins();
+        return adminService.getAllAdmins();
     }
 
     @GetMapping("/getadmindetails/{adminId}")
     public Admin getAdminById(@PathVariable int adminId) {
-        return aService.findAdminById(adminId);
+        return adminService.getAdminById(adminId);
     }
 
     @PostMapping("/addadmin")
     public void createAdmin(@RequestBody Admin admin) {
-        aService.addAdmin(admin);
+        adminService.createAdmin(admin);
     }
 
     @PutMapping("/updateadmin/{adminId}")
     public void updateAdminDetails(@RequestBody Admin admin, @PathVariable int adminId) {
-        aService.updateAdmin(admin, adminId);
+        adminService.updateAdmin(admin, adminId);
     }
 
     @DeleteMapping("/deleteadmin/{adminId}")
     public void removeAdmin(@PathVariable int adminId) {
-        aService.deleteAdmin(adminId);
+        adminService.deleteAdmin(adminId);
     }
 
 }

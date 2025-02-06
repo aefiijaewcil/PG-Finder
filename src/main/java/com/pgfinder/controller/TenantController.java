@@ -26,17 +26,17 @@ public class TenantController {
 
     @GetMapping("/getalltenants")
     public List<Tenant> getAllTenants() {
-        return tservice.findAllTenants();
+        return tservice.getAllTenants();
     }
 
     @GetMapping("/gettenantdetails/{tenanatId}")
     public Tenant getTenantById(@PathVariable int tenantId) {
-        return tservice.findTenantById(tenantId);
+        return tservice.getTenantById(tenantId);
     }
 
     @PostMapping("/addtenant")
-    public void createTenant(@RequestBody Tenant tenant) {
-        tservice.addTenant(tenant);
+    public void addTenant(@RequestBody Tenant tenant) {
+        tservice.createTenant(tenant);
     }
 
     @PutMapping("/updatetenant/{tenantId}")

@@ -32,7 +32,7 @@ public class BookingService {
     }
 
     public List<Booking> getAllBookings(int tenanatId) {
-        Tenant tenant = tenantService.findTenantById(tenanatId);
+        Tenant tenant = tenantService.getTenantById(tenanatId);
         return bookingRepository.findByTenant(tenant);
     }
 

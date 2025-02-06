@@ -23,17 +23,17 @@ public class OwnerController {
 
     @GetMapping("/getallowners")
     public List<Owner> getAllOwners() {
-        return oservice.findAllOwners();
+        return oservice.getAllOwners();
     }
 
     @GetMapping("/getownerdetails/{ownerId}")
     public Owner getOwnerById(@PathVariable int ownerId) {
-        return oservice.findOwnerById(ownerId);
+        return oservice.getOwnerById(ownerId);
     }
 
     @PostMapping("/addowner")
-    public void createOwner(@RequestBody Owner owner) {
-        oservice.addOwner(owner);
+    public void addOwner(@RequestBody Owner owner) {
+        oservice.createOwner(owner);
     }
 
     @PutMapping("/updateowner/{ownerId}")
