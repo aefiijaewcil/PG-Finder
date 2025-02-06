@@ -1,5 +1,7 @@
 package com.pgfinder.entity;
 
+import javax.management.relation.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -29,13 +31,13 @@ public class User {
     @Column(name = "email")
     private String email;
     @Column(name = "role")
-    private String role;
+    private Role role;
 
     public User() {
     }
 
     public User(int id, String firstName, String lastName, String userName, String password, String email,
-            String role) {
+            Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -93,11 +95,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
