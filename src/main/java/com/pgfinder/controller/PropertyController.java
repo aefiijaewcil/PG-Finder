@@ -18,7 +18,7 @@ import com.pgfinder.service.PropertyService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/property")
+@RequestMapping("/properties")
 public class PropertyController {
 
     @Autowired

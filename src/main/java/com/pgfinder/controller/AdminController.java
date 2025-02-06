@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminController {
     @Autowired
     private AdminService adminService;

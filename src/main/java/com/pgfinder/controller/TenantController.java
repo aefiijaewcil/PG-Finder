@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/tenant")
+@RequestMapping("/tenants")
 public class TenantController {
     @Autowired
     private TenantService tservice;

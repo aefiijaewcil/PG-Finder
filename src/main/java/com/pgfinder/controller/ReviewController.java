@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;

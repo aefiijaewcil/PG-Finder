@@ -16,7 +16,7 @@ import com.pgfinder.entity.Owner;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/owner")
+@RequestMapping("/owners")
 public class OwnerController {
     @Autowired
     private OwnerService oservice;

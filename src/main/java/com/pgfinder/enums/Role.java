@@ -1,6 +1,6 @@
 package com.pgfinder.enums;
 
 public enum Role {
-    ADMIN, TENANT, OWNER
+    admin, tenant, owner
 
 }

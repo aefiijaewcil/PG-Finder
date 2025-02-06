@@ -16,7 +16,7 @@ import com.pgfinder.service.WishListService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/wishlist")
+@RequestMapping("/wishlists")
 public class WishListController {
 
     @Autowired

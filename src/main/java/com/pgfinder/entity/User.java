@@ -1,6 +1,6 @@
 package com.pgfinder.entity;
 
-import javax.management.relation.Role;
+import com.pgfinder.enums.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;

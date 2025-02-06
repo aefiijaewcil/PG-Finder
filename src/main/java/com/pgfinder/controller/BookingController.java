@@ -22,7 +22,7 @@ import com.pgfinder.service.TenantService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/booking")
+@RequestMapping("/bookings")
 public class BookingController {
 
     @Autowired
