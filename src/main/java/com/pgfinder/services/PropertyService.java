@@ -64,6 +64,24 @@ public class PropertyService {
         propertyRepository.deleteByOwnerId(ownerId);
     }
 
+    public PropertyDTO propertyApproved(int id) {
+        Property property = propertyRepository.findById(id).orElse(null);
+        if (property != null) {
+            property.setApproved(true);
+            propertyRepository.save(property);
+        }
+        return convertToDTO(property);
+    }
+
+    public PropertyDTO propertyRejected(int id) {
+        Property property = propertyRepository.findById(id).orElse(null);
+        if (property != null) {
+            property.setApproved(false);
+            propertyRepository.save(property);
+        }
+        return convertToDTO(property);
+    }
+
     private PropertyDTO convertToDTO(Property property) {
         return new PropertyDTO(
                 property.getPropertyId(),

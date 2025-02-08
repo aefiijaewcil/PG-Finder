@@ -12,7 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 @Entity
-@DiscriminatorValue("tenant")
+@DiscriminatorValue("TENANT")
 public class Tenant extends User {
 
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -23,7 +23,7 @@ public class Tenant extends User {
 
     @Override
     public void setRole(Role role) {
-        if (role != Role.tenant) {
+        if (role != Role.TENANT) {
             throw new IllegalArgumentException("Role must be TENANT for Tenant entity");
         }
         super.setRole(role);

@@ -12,7 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 @Entity
-@DiscriminatorValue("owner")
+@DiscriminatorValue("OWNER")
 public class Owner extends User {
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY) // Owner holds the list of properties
@@ -20,7 +20,7 @@ public class Owner extends User {
 
     @Override
     public void setRole(Role role) {
-        if (role != Role.owner) {
+        if (role != Role.OWNER) {
             throw new IllegalArgumentException("Role must be OWNER for Owner entity");
         }
         super.setRole(role);

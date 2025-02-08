@@ -6,12 +6,12 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("admin")
+@DiscriminatorValue("ADMIN")
 public class Admin extends User {
 
     @Override
     public void setRole(Role role) {
-        if (role != Role.admin) {
+        if (role != Role.ADMIN) {
             throw new IllegalArgumentException("Role must be ADMIN for Admin entity");
         }
         super.setRole(role);

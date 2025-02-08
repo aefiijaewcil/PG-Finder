@@ -60,7 +60,8 @@ public class ReviewService {
         return convertToDTO(review);
     }
 
-    public List<ReviewDTO> getReviewForProperty(PropertyDTO propertyDTO) {
+    public List<ReviewDTO> getReviewsForProperty(int propertyId) {
+        PropertyDTO propertyDTO = propertyService.getPropertyById(propertyId);
         Property property = new Property();
         BeanUtils.copyProperties(propertyDTO, property);
         List<Review> reviews = reviewRepository.findByProperty(property);

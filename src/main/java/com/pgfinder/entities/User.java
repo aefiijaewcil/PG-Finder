@@ -5,6 +5,8 @@ import com.pgfinder.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ import jakarta.persistence.DiscriminatorType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "ROLE", discriminatorType = DiscriminatorType.STRING)
 public class User {
 
     @Id
@@ -30,7 +32,8 @@ public class User {
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "role")
+    @Column(name = "ROLE", insertable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User() {

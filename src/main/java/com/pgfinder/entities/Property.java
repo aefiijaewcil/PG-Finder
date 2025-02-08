@@ -46,17 +46,21 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviewsList = new ArrayList<>();
 
+    @Column(name = "approved")
+    private boolean approved;
+
     public Property() {
     }
 
     public Property(String propertyName, String address, double rentPrice, Owner owner, boolean availabilityStatus,
-            String description) {
+            String description, boolean approved) {
         this.propertyName = propertyName;
         this.address = address;
         this.rentPrice = rentPrice;
         this.owner = owner;
         this.availabilityStatus = availabilityStatus;
         this.description = description;
+        this.approved = approved;
     }
 
     public int getPropertyId() {
@@ -87,6 +91,10 @@ public class Property {
         return description;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
     public void setPropertyId(int propertyId) {
         this.propertyId = propertyId;
     }
@@ -113,5 +121,9 @@ public class Property {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 }

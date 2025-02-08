@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pgfinder.dtos.PropertyDTO;
 import com.pgfinder.dtos.ReviewDTO;
 import com.pgfinder.enums.Rating;
 import com.pgfinder.services.PropertyService;
@@ -65,8 +64,7 @@ public class ReviewController {
 
     @GetMapping("/getreviewslist")
     public List<ReviewDTO> getReviewsList(@RequestParam int propertyId) {
-        PropertyDTO propertyDTO = propertyService.getPropertyById(propertyId);
-        return reviewService.getReviewForProperty(propertyDTO);
+        return reviewService.getReviewsForProperty(propertyId);
     }
 
     @DeleteMapping("/deleteallreviews/{propertyId}")

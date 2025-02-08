@@ -26,11 +26,6 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/createuser")
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
-    }
-
     @PutMapping("updateuser/{id}")
     public UserDTO updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
         return userService.updateUser(id, userDTO);
