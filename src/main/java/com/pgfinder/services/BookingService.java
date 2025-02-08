@@ -3,10 +3,13 @@ package com.pgfinder.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.pgfinder.dtos.BookingDTO;
+import com.pgfinder.dtos.UserDTO;
 import com.pgfinder.entities.Booking;
 import com.pgfinder.entities.Tenant;
 import com.pgfinder.repositories.BookingRepository;
@@ -36,7 +39,9 @@ public class BookingService {
     }
 
     public List<BookingDTO> getAllBookings(int tenantId) {
-        Tenant tenant = tenantService.getTenantById(tenantId);
+        UserDTO tenantDTO = tenantService.getTenantById(tenantId);
+        Tenant tenant = new Tenant();
+        BeanUtils.copyProperties(tenantDTO, tenant);
         List<Booking> bookingList = bookingRepository.findByTenant(tenant);
         ArrayList<BookingDTO> bookingDtoList = new ArrayList<>();
         for (Booking booking : bookingList) {
@@ -46,7 +51,9 @@ public class BookingService {
     }
 
     public void deleteAllTenantBookings(int tenantId) {
-        Tenant tenant = tenantService.getTenantById(tenantId);
+        UserDTO tenantDTO = tenantService.getTenantById(tenantId);
+        Tenant tenant = new Tenant();
+        BeanUtils.copyProperties(tenantDTO, tenant);
         bookingRepository.deleteByTenant(tenant);
     }
 
@@ -84,7 +91,12 @@ public class BookingService {
     private Booking convertToEntity(BookingDTO bookingDTO) {
         Booking booking = new Booking();
         booking.setBookingId(bookingDTO.getBookingId());
-        Tenant tenant = tenantService.getTenantById(bookingDTO.getTenantId());
+
+        UserDTO tenantDTO = tenantService.getTenantById(bookingDTO.getTenantId());
+        Tenant tenant = new Tenant();
+        BeanUtils.copyProperties(tenantDTO, tenant);
+        booking.setTenant(tenant);
+
         int propertyId = booking.getPropertyId();
         booking.setTenant(tenant);
         booking.setPropertyId(propertyId);

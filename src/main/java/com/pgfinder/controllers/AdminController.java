@@ -11,6 +11,7 @@ import com.pgfinder.dtos.BookingDTO;
 import com.pgfinder.dtos.PropertyDTO;
 import com.pgfinder.dtos.ReviewDTO;
 import com.pgfinder.dtos.UserDTO;
+import com.pgfinder.services.AdminService;
 import com.pgfinder.services.BookingService;
 import com.pgfinder.services.PropertyService;
 import com.pgfinder.services.ReviewService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/admins")
 public class AdminController {
+    @Autowired
+    private AdminService adminService;
 
     @Autowired
     private UserService userService;
@@ -39,6 +43,32 @@ public class AdminController {
 
     @Autowired
     private BookingService bookingService;
+
+    // Admin
+    @GetMapping("/getalladmins")
+    public List<UserDTO> fetchAllAdmins() {
+        return adminService.getAllAdmins();
+    }
+
+    @GetMapping("/getadmin/{id}")
+    public UserDTO fetchAdminById(@PathVariable int id) {
+        return adminService.getAdminById(id);
+    }
+
+    @PutMapping("/updateadmin/{id}")
+    public void updateAdmin(@PathVariable int id, @RequestBody UserDTO adminDTO) {
+        adminService.updateAdmin(adminDTO, id);
+    }
+
+    @DeleteMapping("/removeadmin/{id}")
+    public void deleteAdmin(@PathVariable int id) {
+        adminService.deleteAdmin(id);
+    }
+
+    @PostMapping("/createadmin")
+    public void createAdmin(@RequestBody UserDTO adminDTO) {
+        adminService.createAdmin(adminDTO);
+    }
 
     // Manage users
 

@@ -1,5 +1,6 @@
 package com.pgfinder.services;
 
+import com.pgfinder.dtos.LoginDTO;
 import com.pgfinder.dtos.UserDTO;
 import com.pgfinder.entities.Admin;
 import com.pgfinder.entities.Owner;
@@ -49,24 +50,16 @@ public class UserService {
         return convertToDTO(user);
     }
 
-    // public void createUser(UserDTO userDTO) {
-    // Role role = userDTO.getRole();
-    // if (("ADMIN") == role.toString()) {
-    // Admin admin = new Admin();
-    // BeanUtils.copyProperties(userDTO, admin);
-    // adminService.createAdmin(admin);
-    // } else if (("OWNER") == role.toString()) {
-    // Owner owner = new Owner();
-    // BeanUtils.copyProperties(userDTO, owner);
-    // ownerService.createOwner(owner);
-    // } else if (("TENANT") == role.toString()) {
-    // Tenant tenant = new Tenant();
-    // BeanUtils.copyProperties(userDTO, tenant);
-    // tenantService.createTenant(tenant);
-    // }
-    // // User user = convertToEntity(userDTO);
-    // // return convertToDTO(userRepository.save(user));
-    // }
+    public void createUser(UserDTO userDTO) {
+        Role role = userDTO.getRole();
+        if (("ADMIN") == role.toString()) {
+            adminService.createAdmin(userDTO);
+        } else if (("OWNER") == role.toString()) {
+            ownerService.createOwner(userDTO);
+        } else if (("TENANT") == role.toString()) {
+            tenantService.createTenant(userDTO);
+        }
+    }
 
     public UserDTO updateUser(int id, UserDTO userDTO) {
         User existingUser = userRepository.findById(id).orElse(null);
@@ -93,6 +86,16 @@ public class UserService {
             userDtoList.add(convertToDTO(user));
         }
         return userDtoList;
+    }
+
+    public LoginDTO validateUser(String userName, String password) {
+        Object obj = userRepository.findIdAndRoleByUsernameAndPassword(userName, password);
+        if (obj == null) {
+            return null;
+        }
+        LoginDTO loginDTO = new LoginDTO();
+        BeanUtils.copyProperties(obj, loginDTO);
+        return loginDTO;
     }
 
     private UserDTO convertToDTO(User user) {

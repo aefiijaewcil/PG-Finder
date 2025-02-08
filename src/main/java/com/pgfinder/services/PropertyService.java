@@ -3,10 +3,14 @@ package com.pgfinder.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.pgfinder.dtos.PropertyDTO;
+import com.pgfinder.dtos.UserDTO;
+import com.pgfinder.entities.Owner;
 import com.pgfinder.entities.Property;
 import com.pgfinder.repositories.PropertyRepository;
 
@@ -99,7 +103,12 @@ public class PropertyService {
         property.setPropertyName(propertyDTO.getPropertyName());
         property.setAddress(propertyDTO.getAddress());
         property.setRentPrice(propertyDTO.getRentPrice());
-        property.setOwner(ownerService.getOwnerById(propertyDTO.getOwnerId()));
+
+        UserDTO ownerDTO = ownerService.getOwnerById(propertyDTO.getOwnerId());
+        Owner owner = new Owner();
+        BeanUtils.copyProperties(ownerDTO, owner);
+        property.setOwner(owner);
+
         property.setAvailabilityStatus(propertyDTO.isAvailabilityStatus());
         property.setDescription(propertyDTO.getDescription());
         return property;

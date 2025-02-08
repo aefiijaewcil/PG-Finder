@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pgfinder.dtos.UserDTO;
 import com.pgfinder.entities.Tenant;
 import com.pgfinder.services.TenantService;
 
@@ -25,22 +26,22 @@ public class TenantController {
     private TenantService tservice;
 
     @GetMapping("/getalltenants")
-    public List<Tenant> getAllTenants() {
+    public List<UserDTO> getAllTenants() {
         return tservice.getAllTenants();
     }
 
     @GetMapping("/gettenantdetails/{tenanatId}")
-    public Tenant getTenantById(@PathVariable int tenantId) {
+    public UserDTO getTenantById(@PathVariable int tenantId) {
         return tservice.getTenantById(tenantId);
     }
 
     @PostMapping("/addtenant")
-    public void addTenant(@RequestBody Tenant tenant) {
-        tservice.createTenant(tenant);
+    public void addTenant(@RequestBody UserDTO tenantDTO) {
+        tservice.createTenant(tenantDTO);
     }
 
     @PutMapping("/updatetenant/{tenantId}")
-    public void updateTenantDetails(@RequestBody Tenant tenant, @PathVariable int tenantId) {
+    public void updateTenantDetails(@RequestBody UserDTO tenant, @PathVariable int tenantId) {
         tservice.updateTenant(tenant, tenantId);
     }
 
